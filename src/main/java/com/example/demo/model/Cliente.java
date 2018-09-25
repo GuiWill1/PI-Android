@@ -24,18 +24,11 @@ public class Cliente implements Serializable{
     
      @OneToMany(mappedBy = "cliente", orphanRemoval=true, cascade = 
      CascadeType.ALL)
-    private List<Telefone> telefones = new ArrayList<Telefone>();
+   
   
     //@JoinColumn(name="telefone_id")
    
-    public List<Telefone> getTelefone() {
-        return telefones;
-    }
-
-    public void setTelefone(List<Telefone> Telefones) {
-        this.telefones = telefones;
-    }
-    
+ 
     public Long getId() {
         return id;
     }
