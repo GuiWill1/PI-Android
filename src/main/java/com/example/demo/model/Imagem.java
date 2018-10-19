@@ -6,6 +6,9 @@
 package com.example.demo.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
@@ -15,7 +18,10 @@ import javax.persistence.Entity;
 public class Imagem {
     private long id;
     private String nome;
-
+    private String path;
+   
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public long getId() {
         return id;
     }

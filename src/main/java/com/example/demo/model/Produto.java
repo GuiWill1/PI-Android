@@ -5,7 +5,12 @@
  */
 package com.example.demo.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
@@ -13,11 +18,40 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Produto {
+    private Long id;
     private String nome;
     private double preco;
-    private Categoria categoria;
+    private double custo;
+    //private Categoria categoria;
     private int quantidade;
-    private Imagem imagens;
+     //private List<Imagem> imagens = new ArrayList<Imagem>();
+    
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+   /* public List<Imagem> getImagens() {
+        return imagens;
+    }
+
+    public void setImagens(List<Imagem> imagens) {
+        this.imagens = imagens;
+    }*/
+
+    public double getCusto() {
+        return custo;
+    }
+
+    public void setCusto(double custo) {
+        this.custo = custo;
+    }
+    
 
     public String getNome() {
         return nome;
@@ -35,13 +69,13 @@ public class Produto {
         this.preco = preco;
     }
 
-    public Categoria getCategoria() {
+   /* public Categoria getCategoria() {
         return categoria;
     }
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
-    }
+    }*/
 
     public int getQuantidade() {
         return quantidade;
@@ -51,11 +85,5 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    public Imagem getImagens() {
-        return imagens;
-    }
-
-    public void setImagens(Imagem imagens) {
-        this.imagens = imagens;
-    }
+  
 }

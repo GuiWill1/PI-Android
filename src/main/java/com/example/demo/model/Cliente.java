@@ -16,19 +16,19 @@ import javax.persistence.OneToMany;
 @Entity
 public class Cliente implements Serializable{
     private static final long serialVersionUID = 5684774867755233893L;
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+  
     private long id;
     
     private String nome;
+    private String telefone;
+    private String email;
+    private String senha;
     
-     @OneToMany(mappedBy = "cliente", orphanRemoval=true, cascade = 
-     CascadeType.ALL)
-   
   
     //@JoinColumn(name="telefone_id")
    
- 
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public Long getId() {
         return id;
     }

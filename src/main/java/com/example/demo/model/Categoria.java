@@ -8,6 +8,9 @@ package com.example.demo.model;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
@@ -18,7 +21,9 @@ public class Categoria {
     private long id;
     private String nome;
     private List<Produto> produtos = new ArrayList<Produto>();
-
+    
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public long getId() {
         return id;
     }
