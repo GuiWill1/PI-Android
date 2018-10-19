@@ -6,8 +6,12 @@
 package com.example.demo.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
@@ -18,7 +22,11 @@ public class Venda {
     private long id;
     private List<Produto> produtos = new ArrayList<Produto>();
     private Cliente cliente;
-
+    private Date data;
+    private double valor;
+    
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public long getId() {
         return id;
     }
@@ -43,12 +51,12 @@ public class Venda {
         this.cliente = cliente;
     }
 
-    public String getDate() {
-        return date;
+    public Date getData() {
+        return data;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setData(Date data) {
+        this.data = data;
     }
 
     public double getValor() {
@@ -58,6 +66,5 @@ public class Venda {
     public void setValor(double valor) {
         this.valor = valor;
     }
-    private String date;
-    public double valor ;
+   
 }
