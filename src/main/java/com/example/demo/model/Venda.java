@@ -8,19 +8,22 @@ package com.example.demo.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
- * @author Rafaella
+ * @author Guilhermy
  */
 @Entity
+@Table(name = "venda")
 public class Venda {
     private long id;
-    private List<Produto> produtos = new ArrayList<Produto>();
+    //private List<Produto> produtos = new ArrayList<Produto>();
     private Cliente cliente;
     private Date data;
     private double valor;
@@ -34,14 +37,14 @@ public class Venda {
     public void setId(long id) {
         this.id = id;
     }
-
-    public List<Produto> getProdutos() {
+   
+    /*public List<Produto> getProdutos() {
         return produtos;
     }
 
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
-    }
+    }*/
 
     public Cliente getCliente() {
         return cliente;
@@ -58,7 +61,7 @@ public class Venda {
     public void setData(Date data) {
         this.data = data;
     }
-
+    @Column(name = "valor", nullable = false)
     public double getValor() {
         return valor;
     }

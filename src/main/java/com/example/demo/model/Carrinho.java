@@ -5,22 +5,28 @@
  */
 package com.example.demo.model;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author Rafaella
  */
 @Entity
+@Table(name = "carrinho")
 public class Carrinho {
     private Long id;
-    private List<Produto> produtos = new ArrayList<Produto>();
+    private Collection<Produto> produtos;
     private Date expireTime;
     private Cliente cliente;
     
@@ -33,7 +39,7 @@ public class Carrinho {
     public void setId(Long id) {
         this.id = id;
     }
-
+    @Column(name = "expireTime", nullable = false)
     public Date getExpireTime() {
         return expireTime;
     }
@@ -42,6 +48,8 @@ public class Carrinho {
         this.expireTime = expireTime;
     }
 
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="cliente")
     public Cliente getCliente() {
         return cliente;
     }
@@ -49,11 +57,15 @@ public class Carrinho {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    public List<Produto> getProdutos() {
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="produtos")
+    public Collection<Produto> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(List<Produto> produtos) {
+    public void setProdutos(Collection<Produto> produtos) {
         this.produtos = produtos;
     }
+ 
+  
 }

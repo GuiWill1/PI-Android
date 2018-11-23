@@ -5,22 +5,27 @@
  */
 package com.example.demo.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Rafaella
  */
 @Entity
+@Table(name = "categoria")
 public class Categoria {
     private long id;
     private String nome;
-    private List<Produto> produtos = new ArrayList<Produto>();
+    private Collection<Produto> produtos;
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -31,7 +36,7 @@ public class Categoria {
     public void setId(long id) {
         this.id = id;
     }
-
+    @Column(name = "nome", nullable = false)
     public String getNome() {
         return nome;
     }
@@ -39,12 +44,14 @@ public class Categoria {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public List<Produto> getProdutos() {
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="produtos")
+    public Collection<Produto> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(List<Produto> produtos) {
+    public void setProdutos(Collection<Produto> produtos) {
         this.produtos = produtos;
     }
+
 }

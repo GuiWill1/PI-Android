@@ -5,26 +5,32 @@
  */
 package com.example.demo.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Rafaella
  */
 @Entity
+@Table(name = "produto")
 public class Produto {
     private Long id;
     private String nome;
     private double preco;
     private double custo;
-    //private Categoria categoria;
+    private Categoria categoria;
     private int quantidade;
-     //private List<Imagem> imagens = new ArrayList<Imagem>();
+    private Collection<Imagem> imagens;
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -36,14 +42,7 @@ public class Produto {
         this.id = id;
     }
 
-   /* public List<Imagem> getImagens() {
-        return imagens;
-    }
-
-    public void setImagens(List<Imagem> imagens) {
-        this.imagens = imagens;
-    }*/
-
+    @Column(name = "custo", nullable = false)
     public double getCusto() {
         return custo;
     }
@@ -52,7 +51,7 @@ public class Produto {
         this.custo = custo;
     }
     
-
+    @Column(name = "nome", nullable = false)
     public String getNome() {
         return nome;
     }
@@ -60,7 +59,7 @@ public class Produto {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
+    @Column(name = "preco", nullable = false)
     public double getPreco() {
         return preco;
     }
@@ -69,14 +68,26 @@ public class Produto {
         this.preco = preco;
     }
 
-   /* public Categoria getCategoria() {
+   @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="categoria")
+    public Categoria getCategoria() {
         return categoria;
     }
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="imagem")
+    public Collection<Imagem> getImagens() {
+        return imagens;
+    }
+
+    public void setImagens(Collection<Imagem> imagens) {
+        this.imagens = imagens;
+    }
+
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
-    }*/
-
+    }
+    @Column(name = "quantidade", nullable = false)
     public int getQuantidade() {
         return quantidade;
     }

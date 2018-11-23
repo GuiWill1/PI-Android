@@ -9,12 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author Rafaella
  */
 @Entity
+@Table(name = "Imagem")
 public class Imagem {
     private long id;
     private String nome;
@@ -24,6 +26,14 @@ public class Imagem {
     @GeneratedValue(strategy=GenerationType.AUTO)
     public long getId() {
         return id;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public void setId(long id) {

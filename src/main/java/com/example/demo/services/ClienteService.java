@@ -10,7 +10,10 @@ public class ClienteService {
 
     @Autowired
     ClienteRepository clienteRepository;
-
+    
+    public Cliente autenticarCliente(Cliente cli){
+        return clienteRepository.findByEmailAndSenha(cli.getEmail(), cli.getSenha());
+    } 
     public void cadastrarCliente(Cliente cli) {
         clienteRepository.save(cli);
     }
