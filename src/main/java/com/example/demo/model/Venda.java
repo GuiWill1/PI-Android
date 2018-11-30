@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Collection;
+import javax.persistence.OneToMany;
 /**
  *
  * @author Guilhermy
@@ -23,7 +24,7 @@ import java.util.Collection;
 //@Table(name = "venda")
 public class Venda {
     private long id;
-    private Collection<Produto> produtos;
+    private List<Produto> produtos;
     private Cliente cliente;
     private Date data;
     private double valor;
@@ -49,12 +50,12 @@ public class Venda {
     public Date getData() {
         return data;
     }
-
-    public Collection<Produto> getProdutos() {
+    @OneToMany
+    public List<Produto> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(Collection<Produto> produtos) {
+    public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }
 
