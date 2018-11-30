@@ -23,7 +23,6 @@ import javax.persistence.Table;
  * @author Rafaella
  */
 @Entity
-@Table(name = "carrinho")
 public class Carrinho {
     private Long id;
     private Collection<Produto> produtos;
@@ -39,7 +38,7 @@ public class Carrinho {
     public void setId(Long id) {
         this.id = id;
     }
-    @Column(name = "expireTime", nullable = false)
+    //@Column(name = "expireTime", nullable = false)
     public Date getExpireTime() {
         return expireTime;
     }
@@ -48,8 +47,8 @@ public class Carrinho {
         this.expireTime = expireTime;
     }
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="cliente")
+    @OneToOne
+    //@JoinColumn(name="cliente")
     public Cliente getCliente() {
         return cliente;
     }
@@ -57,8 +56,8 @@ public class Carrinho {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="produtos")
+    @OneToMany
+    //@JoinColumn(name="produtos")
     public Collection<Produto> getProdutos() {
         return produtos;
     }

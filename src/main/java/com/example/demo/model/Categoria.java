@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * @author Rafaella
  */
 @Entity
-@Table(name = "categoria")
+//@Table(name = "categoria")
 public class Categoria {
     private long id;
     private String nome;
@@ -36,7 +36,7 @@ public class Categoria {
     public void setId(long id) {
         this.id = id;
     }
-    @Column(name = "nome", nullable = false)
+    //@Column(name = "nome", nullable = false)
     public String getNome() {
         return nome;
     }
@@ -44,8 +44,8 @@ public class Categoria {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="produtos")
+    @OneToMany
+    @JoinColumn(name="id_categoria")
     public Collection<Produto> getProdutos() {
         return produtos;
     }

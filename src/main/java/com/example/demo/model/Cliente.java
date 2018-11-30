@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 
 @Entity
-@Table(name = "cliente")
+//@Table(name = "cliente")
 public class Cliente implements Serializable{
     
   
@@ -38,7 +38,7 @@ public class Cliente implements Serializable{
     public void setId(Long id) {
         this.id = id;
     }
-    @Column(name = "nome", nullable = false)
+    //@Column(name = "nome", nullable = false)
     public String getNome() {
         return nome;
     }

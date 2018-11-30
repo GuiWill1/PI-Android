@@ -6,6 +6,7 @@
 package com.example.demo.controller;
 import com.example.demo.model.Categoria;
 import com.example.demo.services.CategoriaService;
+import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 /**
  *
  * @author guilhermywilliamandrade
@@ -35,8 +37,9 @@ public class CategoriaController {
     }
     
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    void removerCategoria(@PathVariable Long id) {
+    ResponseEntity removerCategoria(@PathVariable Long id) {
         categoriaService.excluirCategoria(id);
+        return new ResponseEntity(HttpStatus.OK);
     }
     
     @RequestMapping(method = RequestMethod.PUT)
@@ -44,8 +47,16 @@ public class CategoriaController {
         categoriaService.editarCategoria(cat);
     }
     
-    @RequestMapping(method = RequestMethod.GET)
-    void mostraCategoria(Long id) {
+    @RequestMapping(method = RequestMethod.GET, value= "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Categoria>mostraCategoria(@PathVariable Long id) {
         categoriaService.buscaCategoria(id);
+        Categoria categoria;
+        try{
+            categoria = categoriaService.buscaCategoria(id);
+            
+        }catch(NoSuchElementException e){
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(categoria, HttpStatus.OK);
     }
 }

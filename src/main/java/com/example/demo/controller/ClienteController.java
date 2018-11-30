@@ -38,12 +38,12 @@ public class ClienteController {
     public ResponseEntity autenticar(@RequestBody Cliente cli){
        Cliente cliAuth = clienteService.autenticarCliente(cli);
        
-       if(cliAuth == null || cliAuth.getNome().equals("") || cliAuth.getSenha().equals("")){
+       if(cliAuth == null || cliAuth.getEmail().equals("") || cliAuth.getSenha().equals("")){
            return new ResponseEntity(cliAuth, HttpStatus.FORBIDDEN);
        }
        
         JwtBuilder jwtBuilder = Jwts.builder();
-        jwtBuilder.setSubject(cliAuth.getNome());
+        jwtBuilder.setSubject(cliAuth.getEmail());
         jwtBuilder.setExpiration(new Date(System.currentTimeMillis()+10*60*1000));
         jwtBuilder.signWith(AutenticacaoController.key);
         

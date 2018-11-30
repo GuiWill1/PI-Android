@@ -22,7 +22,7 @@ import javax.persistence.Table;
  * @author Rafaella
  */
 @Entity
-@Table(name = "produto")
+//@Table(name = "produto")
 public class Produto {
     private Long id;
     private String nome;
@@ -42,7 +42,7 @@ public class Produto {
         this.id = id;
     }
 
-    @Column(name = "custo", nullable = false)
+    //@Column(name = "custo", nullable = false)
     public double getCusto() {
         return custo;
     }
@@ -51,7 +51,7 @@ public class Produto {
         this.custo = custo;
     }
     
-    @Column(name = "nome", nullable = false)
+    //@Column(name = "nome", nullable = false)
     public String getNome() {
         return nome;
     }
@@ -59,7 +59,7 @@ public class Produto {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    @Column(name = "preco", nullable = false)
+    //@Column(name = "preco", nullable = false)
     public double getPreco() {
         return preco;
     }
@@ -68,13 +68,13 @@ public class Produto {
         this.preco = preco;
     }
 
-   @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="categoria")
+   @ManyToOne
+    //@JoinColumn(name="categoria_id")
     public Categoria getCategoria() {
         return categoria;
     }
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="imagem")
+    @OneToMany
+    @JoinColumn(name="id_produto")
     public Collection<Imagem> getImagens() {
         return imagens;
     }
@@ -87,7 +87,7 @@ public class Produto {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
-    @Column(name = "quantidade", nullable = false)
+    //@Column(name = "quantidade", nullable = false)
     public int getQuantidade() {
         return quantidade;
     }

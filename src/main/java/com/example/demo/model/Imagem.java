@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * @author Rafaella
  */
 @Entity
-@Table(name = "Imagem")
+//@Table(name = "Imagem")
 public class Imagem {
     private long id;
     private String nome;

@@ -6,6 +6,7 @@
 package com.example.demo.controller;
 import com.example.demo.model.Produto;
 import com.example.demo.services.ProdutoService;
+import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 /**
  *
  * @author guilhermywilliamandrade
@@ -35,8 +37,9 @@ public class ProdutoController {
     }
     
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    void removerProduto(@PathVariable Long id) {
+    ResponseEntity removerProduto(@PathVariable Long id) {
         produtoService.excluirProduto(id);
+        return new ResponseEntity(HttpStatus.OK);
     }
     
     @RequestMapping(method = RequestMethod.PUT)
@@ -44,8 +47,14 @@ public class ProdutoController {
         produtoService.editarProduto(prod);
     }
     
-    @RequestMapping(method = RequestMethod.GET)
-    void mostraProduto(Long id) {
-        produtoService.buscaProduto(id);
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Produto> mostraProduto(@PathVariable Long id) {
+        Produto prod = new Produto();
+        try{
+            produtoService.buscaProduto(id);
+        }catch(NoSuchElementException e){
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(prod, HttpStatus.OK);
     }
 }
