@@ -45,7 +45,7 @@ public class Categoria {
         this.nome = nome;
     }
     @OneToMany
-    @JoinColumn(name="id_categoria")
+    //@JoinColumn(name="id_categoria")
     public Collection<Produto> getProdutos() {
         return produtos;
     }
