@@ -5,16 +5,18 @@
  */
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author HP
  */
-//@Entity
+@Entity
 public class ItemVenda {
    
     private long id;
@@ -24,8 +26,8 @@ public class ItemVenda {
     private Double valor;
     private Venda venda;
     
-   // @Id
-   // @GeneratedValue(strategy=GenerationType.AUTO)
+   @Id
+   @GeneratedValue(strategy=GenerationType.IDENTITY)
     public long getId() {
         return id;
     }
@@ -41,7 +43,7 @@ public class ItemVenda {
     public void setCusto(Double custo) {
         this.custo = custo;
     }
-
+    @ManyToOne()
     public Produto getProduto() {
         return produto;
     }
@@ -65,7 +67,8 @@ public class ItemVenda {
     public void setValor(Double valor) {
         this.valor = valor;
     }
-
+    @JsonIgnore
+    @ManyToOne()
     public Venda getVenda() {
         return venda;
     }

@@ -29,24 +29,20 @@ public class CarrinhoController {
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity cadastrarCarrinho(@RequestBody Carrinho car) {
         
-        carrinhoService.cadastrarCarrinho(car);
+       // carrinhoService.cadastrarCarrinho(car);
         
         return new ResponseEntity(HttpStatus.CREATED);
         
     }
     
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    void removerCarrinho(@PathVariable Long id) {
-        carrinhoService.excluirCarrinho(id);
-    }
     
     @RequestMapping(method = RequestMethod.PUT)
     void editarCarrinho(Carrinho car) {
-        carrinhoService.editarCarrinho(car);
+       // carrinhoService.editarCarrinho(car);
     }
     
     @RequestMapping(method = RequestMethod.GET)
     void mostraCarrinho(Long id) {
-        carrinhoService.buscaCarrinho(id);
+     //   carrinhoService.buscaCarrinho(id);
     }
 }

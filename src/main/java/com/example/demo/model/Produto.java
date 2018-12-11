@@ -5,7 +5,11 @@
  */
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -28,12 +33,13 @@ public class Produto {
     private String nome;
     private double preco;
     private double custo;
-    private Categoria categoria;
+    private List<Categoria> categoria;
     private int quantidade;
-    private Collection<Imagem> imagens;
+    private List<Imagem> imagens;
+    
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -42,7 +48,7 @@ public class Produto {
         this.id = id;
     }
 
-    //@Column(name = "custo", nullable = false)
+    @JsonProperty(access = Access.WRITE_ONLY)
     public double getCusto() {
         return custo;
     }
@@ -68,23 +74,23 @@ public class Produto {
         this.preco = preco;
     }
 
-   @ManyToOne
-    //@JoinColumn(name="categoria_id")
-    public Categoria getCategoria() {
+   @ManyToMany()
+   @JsonIgnore
+    public List<Categoria> getCategoria() {
         return categoria;
     }
-    @OneToMany
-    @JoinColumn(name="id_produto")
-    public Collection<Imagem> getImagens() {
+    @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
+    @JoinColumn(name="produto_id")
+    public List<Imagem> getImagens() {
         return imagens;
     }
 
-    public void setImagens(Collection<Imagem> imagens) {
+    public void setImagens(List<Imagem> imagens) {
         this.imagens = imagens;
     }
 
 
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(List<Categoria> categoria) {
         this.categoria = categoria;
     }
     //@Column(name = "quantidade", nullable = false)

@@ -5,24 +5,26 @@
  */
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author HP
  */
-//@Entity
+@Entity
 public class ItemCarrinho {
     
     private long id;
     private Produto produto;
     private double quantidade;
     private Carrinho carrinho;
-   // @Id
-   // @GeneratedValue(strategy=GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public long getId() {
         return id;
     }
@@ -30,7 +32,7 @@ public class ItemCarrinho {
     public void setId(long id) {
         this.id = id;
     }
-
+    @ManyToOne()
     public Produto getProduto() {
         return produto;
     }
@@ -46,7 +48,8 @@ public class ItemCarrinho {
     public void setQuantidade(double quantidade) {
         this.quantidade = quantidade;
     }
-
+    @JsonIgnore
+    @ManyToOne()
     public Carrinho getCarrinho() {
         return carrinho;
     }

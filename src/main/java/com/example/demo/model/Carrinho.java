@@ -5,8 +5,10 @@
  */
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,12 +27,12 @@ import javax.persistence.Table;
 @Entity
 public class Carrinho {
     private Long id;
-    private Collection<Produto> produtos;
+    private List<ItemCarrinho> itens;
     private Date expireTime;
     private Cliente cliente;
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -47,8 +49,9 @@ public class Carrinho {
         this.expireTime = expireTime;
     }
 
-    @OneToOne
-    //@JoinColumn(name="cliente")
+    @OneToOne()
+    @JsonIgnore
+    @JoinColumn(name="id_cliente", unique = true)
     public Cliente getCliente() {
         return cliente;
     }
@@ -56,14 +59,13 @@ public class Carrinho {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    @OneToMany
-    //@JoinColumn(name="produtos")
-    public Collection<Produto> getProdutos() {
-        return produtos;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "carrinho")
+    public List<ItemCarrinho> getItens() {
+        return itens;
     }
 
-    public void setProdutos(Collection<Produto> produtos) {
-        this.produtos = produtos;
+    public void setItens(List<ItemCarrinho> itens) {
+        this.itens = itens;
     }
  
   

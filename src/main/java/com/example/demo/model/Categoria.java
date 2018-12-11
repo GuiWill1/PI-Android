@@ -6,6 +6,7 @@
 package com.example.demo.model;
 
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -25,10 +27,10 @@ import javax.persistence.Table;
 public class Categoria {
     private long id;
     private String nome;
-    private Collection<Produto> produtos;
+    private List<Produto> produtos;
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public long getId() {
         return id;
     }
@@ -44,13 +46,12 @@ public class Categoria {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    @OneToMany
-    //@JoinColumn(name="id_categoria")
-    public Collection<Produto> getProdutos() {
+    @ManyToMany(mappedBy = "categoria")
+    public List<Produto> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(Collection<Produto> produtos) {
+    public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }
 

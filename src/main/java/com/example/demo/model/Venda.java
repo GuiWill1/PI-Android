@@ -12,7 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 /**
  *
  * @author Guilhermy
@@ -21,13 +25,13 @@ import javax.persistence.OneToMany;
 //@Table(name = "venda")
 public class Venda {
     private long id;
-    private List<Produto> produtos;
+    private List<ItemVenda> itensVenda;
     private Cliente cliente;
     private Date data;
     private double valor;
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public long getId() {
         return id;
     }
@@ -35,7 +39,7 @@ public class Venda {
     public void setId(long id) {
         this.id = id;
     }
-   
+   @OneToOne
     public Cliente getCliente() {
         return cliente;
     }
@@ -43,17 +47,20 @@ public class Venda {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
+    @Temporal(TemporalType.TIMESTAMP)
     public Date getData() {
         return data;
     }
-    @OneToMany
-    public List<Produto> getProdutos() {
-        return produtos;
+    @OneToMany(cascade = {CascadeType.MERGE,
+        CascadeType.PERSIST,
+        CascadeType.REMOVE},
+            mappedBy = "venda")
+    public List<ItemVenda> getProdutos() {
+        return itensVenda;
     }
 
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
+    public void setProdutos(List<ItemVenda> itens) {
+        this.itensVenda = itens;
     }
 
     public void setData(Date data) {

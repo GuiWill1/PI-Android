@@ -23,6 +23,7 @@ public class Cliente implements Serializable{
   
     private long id;
     private String nome;
+    private String telefone;
     private String email;
     private String senha;
     
@@ -30,9 +31,17 @@ public class Cliente implements Serializable{
     //@JoinColumn(name="telefone_id")
    
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     public Long getId() {
         return id;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public void setId(Long id) {
@@ -47,7 +56,7 @@ public class Cliente implements Serializable{
         this.nome = nome;
     }
 
-     @Column(name = "email", nullable = false)
+     @Column(unique = true, nullable = false)
     public String getEmail() {
         return email;
     }
