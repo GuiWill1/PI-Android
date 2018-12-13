@@ -72,7 +72,7 @@ public class ClienteController {
     }
     
     
-    @RequestMapping(method = RequestMethod.POST,value= "/autenticar",
+    @RequestMapping(method = RequestMethod.POST,value= "/auth",
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity autenticar(@RequestBody Cliente cli){
         Cliente cliAuth = clienteService.autenticarCliente(cli);

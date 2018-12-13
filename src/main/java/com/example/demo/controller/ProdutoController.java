@@ -49,12 +49,13 @@ public class ProdutoController {
     
     @RequestMapping(method = RequestMethod.GET, value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Produto> mostraProduto(@PathVariable Long id) {
-        Produto prod = new Produto();
+        Produto prod;
         try{
-            produtoService.buscaProduto(id);
+            prod = produtoService.buscaProduto(id);
         }catch(NoSuchElementException e){
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity(prod, HttpStatus.OK);
+        
     }
 }
