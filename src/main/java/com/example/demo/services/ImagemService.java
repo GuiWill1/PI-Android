@@ -82,7 +82,7 @@ ImagemService(FileStorageProperties fsp){
             Files.createDirectories(absolutePath);
             Files.copy(file.getInputStream(), absolutePath, StandardCopyOption.REPLACE_EXISTING);
             Imagem img = new Imagem();
-            img.setNome(relativePath);
+            img.setPath(relativePath);
             img.setProduto(p);
             
             imagemRepository.save(img);
@@ -100,7 +100,7 @@ ImagemService(FileStorageProperties fsp){
                 }
                 Path imgpath = Paths.get(
                     fileStorageLocation.toString()
-                    +img.getNome()).toAbsolutePath().normalize();
+                    +img.getPath()).toAbsolutePath().normalize();
                 
                 Path fullPath = this.fileStorageLocation.resolve(imgpath).normalize();
                 

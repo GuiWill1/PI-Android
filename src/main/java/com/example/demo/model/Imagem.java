@@ -21,7 +21,6 @@ import javax.persistence.Table;
 //@Table(name = "Imagem")
 public class Imagem {
     private long id;
-    private String nome;
     private Produto produto;
     private String path;
    
@@ -50,14 +49,7 @@ public class Imagem {
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
-    @JsonIgnore
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    
 
    
 
